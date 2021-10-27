@@ -12,9 +12,21 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 app.use(express.static("./public"));
 app.use(express.json());
 
+app.use(function (req, res, next) {
+  // method path - ip
+  let logger = 'Method: '+ req.method + ' | ' +'Path: '+ req.path + ' | ' + 'Ip: ' + req.ip;
+  console.log(`👽👽👽️ Request received --> ${logger}`);
+  next();
+});
+
 // rewrite routes
 app.use("/api/v1", mainRouter);
 
+app.get("/test", (req, res) => {
+  res.send(`<h1>jwt-basics</h1>`);
+});
+
+//! OJO donde poner estos middlewares si los pones antes de las rutas no funcionan las rutas
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 

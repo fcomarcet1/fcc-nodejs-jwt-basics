@@ -4,4 +4,6 @@ class CustomAPIError extends Error {
   }
 }
 
+// throw new CustomAPIError ('Custom error message', 401);
+
 module.exports = CustomAPIError;
